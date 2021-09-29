@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script>
+	const rareArray = [
+		"Someone rolls for VIP",
+		"Someone uses TTS<br>for a fact",
+		"Someone speaks<br>in a language other<br>than english",
+		"Dies in hardcore world",
+		"Wins a race<br>without help in GTA",
+		"'Pizza' appears<br>on stream",
+		"Someone says the<br>texturepack is 'strange'<br>when not playing minecraft",
+		"Elytra/ Netherite<br>gear breaks",
+	];
+
+	const uncommonArray = [
+		"Gets raided",
+		"Stream breaks",
+		"Punches horse",
+		"Kavova donates",
+		"Takes off or<br>puts on a Jumper",
+		"A new viewer says<br>'I used to watch you years ago'",
+		"Breny calls beatrice<br>'BEAT RICE!''",
+		"Threatens Hayley with mod",
+		"Actually joins discord<br>to talk to people",
+		"Does some kind of backflip"
+	];
+
+	const commonArray = [
+		"Late for stream",
+		"Anyone subscribes",
+		"Talks about cars",
+		"Mentions 'Pizza'",
+		"Says someones<br>name wrong",
+		"Makes a coffee",
+		"Encounters a hacker",
+		"Eats a wrap",
+		"Talks about<br>sticker socials",
+		"Someone asks to<br>join the game",
+		"Calls something<br>'Gangster'",
+		"Says 'Aww Heck'",
+		"Someone asks if<br>playing on console",
+		"Someone asks if<br>using a controller",
+		"Threatens to<br>headbutt someone",
+		"Someone asks if playing<br>multiplayer/ singleplayer",
+		"Says 'Hey guys,<br>Breny here'",
+		"Tells a story<br>from years ago",
+		"Gmar asks to play GTA"
+	];
+
+	// Functions
+	const itemPicker = (count, originalArray) => {
+		const copy = [...originalArray];
+		const newArray = [];
+		newArray.length = 0;
+
+		let num = 0;
+		while(num < count){
+			const x = Math.floor(Math.random() * copy.length);
+			newArray.push(copy[x]);
+			copy.splice(x, 1);
+			num += 1; // eslint-disable-line
+		}
+		return newArray;
+	};
+
+
+	const applyCells = (cells, data) => {
+		let x = 0;
+		while(cells.length > x){
+			document.getElementById(cells[x]).innerHTML = data[x];
+			x += 1;
+		}
+	};
+
+	const playBingo = () => {
+		const rareCells = ["c1", "d2", "e3", "b4", "a5", "e5"];
+		const rares = itemPicker(6, rareArray);
+		applyCells(rareCells, rares);
+
+		const uncommonCells = ["a1", "e2", "d3", "c4", "b5"];
+		const uncommons = itemPicker(5, uncommonArray);
+		applyCells(uncommonCells, uncommons);
+
+		const commonCells = ["b1", "d1", "e1", "a2", "b2", "c2", "a3", "b3", "a4", "d4", "e4", "c5", "d5"];
+		const commons = itemPicker(13, commonArray);
+		applyCells(commonCells, commons);
+
+		document.getElementById("play").style.visibility = "hidden"; // Hide the button after it's pressed to prevent constant randomisation.
+		document.getElementById("c3").innerHTML = "FREE"; // The middle is always a "free" space
+	};
+
+
+	const changeColor = (elementID) => {
+		const elem = document.getElementById(elementID);
+		const rgbItem = elem.style.backgroundColor;
+		const rgb = `${rgbItem.substr(4, rgbItem.indexOf(')') - 4).split(',').map((color) => parseInt(color).toString(16).padStart(2, '0')).join('')}`;
+		elem.style.backgroundColor = (rgb === "NaN" || rgb === "999999") ? "#e6ffe6" : "#999999";
+	};
+
+
+</script>
+	<style>
+		body {
+			background-color: black;
+		}
+
+		table, th, td {
+			background-color: #999999;
+		  border: 2px solid red;
+		  border-collapse: collapse;
+		  padding: 40px;
+			max-width: 95%;
+			min-width: 95%;
+			max-height: 300px;
+			min-height: 300px;
+		}
+</style>
+</head>
+<body>
+	<center>
+	<table>
+		<tr id= "row1">
+			<th id="a1" onclick="changeColor(this.id);">A1</th>
+			<th id="b1" onclick="changeColor(this.id);">B1</th>
+			<th id="c1" onclick="changeColor(this.id);">C1</th>
+			<th id="d1" onclick="changeColor(this.id);">D1</th>
+			<th id="e1" onclick="changeColor(this.id);">E1</th>
+		</tr>
+		<tr id= "row2">
+			<th id="a2" onclick="changeColor(this.id);">A2</th>
+			<th id="b2" onclick="changeColor(this.id);">B2</th>
+			<th id="c2" onclick="changeColor(this.id);">C2</th>
+			<th id="d2" onclick="changeColor(this.id);">D2</th>
+			<th id="e2" onclick="changeColor(this.id);">E2</th>
+		</tr>
+		<tr id= "row3">
+			<th id="a3" onclick="changeColor(this.id);">A3</th>
+			<th id="b3" onclick="changeColor(this.id);">B3</th>
+			<th id="c3" onclick="changeColor(this.id);">C3</th>
+			<th id="d3" onclick="changeColor(this.id);">D3</th>
+			<th id="e3" onclick="changeColor(this.id);">E3</th>
+		</tr>
+		<tr id= "row4">
+			<th id="a4" onclick="changeColor(this.id);">A4</th>
+			<th id="b4" onclick="changeColor(this.id);">B4</th>
+			<th id="c4" onclick="changeColor(this.id);">C4</th>
+			<th id="d4" onclick="changeColor(this.id);">D4</th>
+			<th id="e4" onclick="changeColor(this.id);">E4</th>
+		</tr>
+		<tr id= "row5">
+			<th id="a5" onclick="changeColor(this.id);">A5</th>
+			<th id="b5" onclick="changeColor(this.id);">B5</th>
+			<th id="c5" onclick="changeColor(this.id);">C5</th>
+			<th id="d5" onclick="changeColor(this.id);">D5</th>
+			<th id="e5" onclick="changeColor(this.id);">E5</th>
+		</tr>
+	</table>
+	<br><br>
+	<button type="button" id="play" autofocus=true onclick="playBingo();">Play Bingo</button>
+	</center>
+</body>
+</html>
